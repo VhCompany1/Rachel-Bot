@@ -1,0 +1,52 @@
+{
+  "banimg": [
+    {
+      "id": "458463680787644426",
+      "link": "https://cdn.discordapp.com/attachments/811427650295300108/816531960552751114/8879cfffcb2860dfd0996c2a0cb9ac33.jpg"
+    },
+    {
+      "id": "668686483858784272",
+      "link": "myrola"
+    },
+    {
+      "id": "668686483858784272",
+      "link": "naodefinido"
+    },
+    {
+      "id": "570700558533656586",
+      "link": "naodefinido"
+    },
+    {
+      "id": "458463680787644426",
+      "link": "naodefinido"
+    },
+    {
+      "id": "570700558533656586",
+      "link": "naodefinido"
+    },
+    {
+      "id": "668686483858784272",
+      "link": "naodefinido"
+    }
+  ],
+  "users": [
+    {
+      "id": "458463680787644426",
+      "nick": "sla#1232",
+      "xp": 0,
+      "level": 0
+    },
+    {
+      "id": "570700558533656586",
+      "nick": "Tdroid2.0#1542",
+      "xp": 20,
+      "level": 0
+    },
+    {
+      "id": "668686483858784272",
+      "nick": "VhCompany#9999",
+      "xp": 83,
+      "level": 0
+    }
+  ]
+}
