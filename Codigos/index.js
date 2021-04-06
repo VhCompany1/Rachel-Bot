@@ -110,6 +110,22 @@ if (!message.member.hasPermission("BAN_MEMBERS")) return message.reply('você é
         .find({id: user.id}).assign({xp: valorxp}).write()
     message.reply(`xp removido com sucesso, agora o ${user} esta no level ${valorlvl} com ${valorxp} xp <a:XP:820799391068585984>`)
   } 
+
+if(comando === "addlvl") { //adicionar level a um usuario
+if (!message.member.hasPermission("BAN_MEMBERS")) return message.reply('você é fraco, lhe falta permissão');
+    if(!args[0])return message.reply('Mencione um usuario valido')
+    if(!args[1])return message.reply('Mencione uma quantia valida de level')
+      let user = message.mentions.users.first() || client.users.cache.get(args[0]);
+      let db1 = db.get('users').find({id: user.id}).value().level
+      let argsx = args[1]
+      let newvalor = Number(argsx)
+      let antvalor = Number(db1)
+      let valorlvl= antvalor + newvalor
+      let valorxp = db.get('users').find({id: user.id}).value().xp
+        db.get('users')
+        .find({id: user.id}).assign({level: valorlvl}).write()
+    message.reply(`level adicionado com sucesso, agora o ${user} esta no level ${valorlvl} com ${valorxp} xp <a:XP:820799391068585984>`)
+  } 
  
   
 });
@@ -133,7 +149,20 @@ if (!message.member.hasPermission("BAN_MEMBERS")) return message.reply('você é
       console.log('Bot ligado com sucesso');
   });
 
+
+
+
   client.on("message", async message =>{ //sistema de xp
+      if(db.get('users').find({id: message.author.id}).value() === undefined && !message.author.bot){
+          message.reply ('Você não tem uma conta criada então criamos uma para você')
+            db.get("users").push({
+            id: message.author.id,
+            nick: message.author.tag,
+            xp: 0,
+            level: 0
+            }).write()
+          
+      }
       if(message.author.id != 655126745732612156){
       let db1 = db.get('users').find({id: message.author.id}).value().xp
       let antvalor = Number(db1)
@@ -142,14 +171,57 @@ if (!message.member.hasPermission("BAN_MEMBERS")) return message.reply('você é
         db.get('users')
         .find({id: message.author.id}).assign({xp: antvalor++}).write()
 
-      if(db1 == 10){
-          message.reply('Teste level1')
-      }else if (db1 == 65){
-          message.reply('Teste level 2')
-      }else if(db1 == 100){
-          message.reply('teste level 3')
-      }
-  }})
+        let lvl = { 
+            1: 100,
+            2: 116,
+            3: 172,
+            4: 240,
+            5: 280,
+            6: 352,
+            7: 436,
+            8: 560,
+            9: 640,
+            10: 760,
+            11: 840,
+            12: 900,
+            13: 1100,
+            14: 1300,
+            15: 1500,
+            16: 1700,
+            18: 1900,
+            19: 2100,
+            20: 2300,
+            21: 2600,
+            22: 2900,
+            23: 3100,
+            24: 3400,
+            25: 3900,
+            26: 4100,
+            27: 4400,
+            28: 4700,
+            29: 4900,
+            30: 5300,
+            31: 5900,
+            32: 6100,
+            33: 6400,
+            33: 6800,
+            34: 7200
+        } 
+
+        for(let n = 0;n <= 100;n++){
+            if(db1 == lvl[n]){       
+
+                let Embed = new Discord.MessageEmbed() 
+                    .setColor(`RANDOM`) 
+                    .setTitle(`Level Up`) 
+                    .setDescription(`O usuario ${message.author.tag} subiu para o level ${n}`)
+                    .setImage(`https://media1.tenor.com/images/f59bf8981599e478f16d704b211a45b5/tenor.gif?itemid=12649755`) 
+                    .setFooter(`• Autor: ${message.author.tag}`, message.author.displayAvatarURL({format: "png"}));
+                
+                client.users.cache.get(message.author.id).send(Embed)
+            }
+        }}})
+
 
 
   client.on("guildMemberAdd", async (member) => { 
